@@ -74,7 +74,7 @@ class Chef::ResourceDefinitionList::MongoDB
     end
 
     Chef::Log.info(
-      "Configuring replicaset with members #{members.map { |n| n['hostname'] }.join(', ')}"
+    "Configuring replicaset with members #{members.map { |n| n['hostname'] }.join(', ')}"
     )
 
     rs_member_ips = []
@@ -108,7 +108,7 @@ class Chef::ResourceDefinitionList::MongoDB
 
       # check if both configs are the same
       config = connection['local']['system']['replset'].find_one('_id' => name)
-
+      
       if config['_id'] == name && config['members'] == rs_members
         # config is up-to-date, do nothing
         Chef::Log.info("Replicaset '#{name}' already configured")

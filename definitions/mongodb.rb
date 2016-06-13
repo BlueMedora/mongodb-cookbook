@@ -214,6 +214,7 @@ define :mongodb_instance,
 
   # replicaset
   if new_resource.is_replicaset && new_resource.auto_configure_replicaset
+    Chef::Log.warn("#{new_resource.replicaset['mongodb']['config']['replSet']}")
     rs_nodes = search(
       :node,
       "mongodb_cluster_name:#{new_resource.replicaset['mongodb']['cluster_name']} AND \

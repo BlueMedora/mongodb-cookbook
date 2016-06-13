@@ -39,8 +39,8 @@ default[:mongodb][:auto_configure][:sharding] = true
 default[:mongodb][:configserver_url] = nil
 
 default[:mongodb][:root_group] = 'root'
-default[:mongodb][:user] = 'mongodb'
-default[:mongodb][:group] = 'mongodb'
+default[:mongodb][:user] = 'mongod'
+default[:mongodb][:group] = 'mongod'
 
 default[:mongodb][:init_dir] = '/etc/init.d'
 default[:mongodb][:init_script_template] = 'debian-mongodb.init.erb'
@@ -74,8 +74,8 @@ when 'rhel', 'fedora'
   # determine the package name
   # from http://rpm.pbone.net/index.php3?stat=3&limit=1&srodzaj=3&dl=40&search=mongodb
   # verified for RHEL5,6 Fedora 18,19
-  default[:mongodb][:repo] = 'http://downloads-distro.mongodb.org/repo/redhat/os'
-  default[:mongodb][:package_name] = 'mongodb-server'
+  default[:mongodb][:repo] = 'http://repo.mongodb.org/yum/redhat/'
+  default[:mongodb][:package_name] = 'mongodb-org-server'
   default[:mongodb][:sysconfig_file] = '/etc/sysconfig/mongodb'
   # Weird user/group for older RHEL & Fedora versions
   if (node['platform_version'].to_i < 7 && node['platform_family'] == 'rhel') \

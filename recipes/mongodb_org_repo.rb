@@ -38,7 +38,7 @@ when 'debian'
 when 'rhel', 'fedora'
   yum_repository 'mongodb' do
     description 'mongodb RPM Repository'
-    baseurl "#{node['mongodb']['repo']}/#{node['kernel']['machine']  =~ /x86_64/ ? 'x86_64' : 'i686'}"
+    baseurl "#{node['mongodb']['repo']}#{node['platform_version'].to_i}/mongodb-org/stable/#{node['kernel']['machine']  =~ /x86_64/ ? 'x86_64' : 'i686'}"
     action :create
     gpgcheck false
     enabled true
@@ -46,5 +46,5 @@ when 'rhel', 'fedora'
 
 else
   # pssst build from source
-  Chef::Log.warn("Adding the #{node['platform_family']} 10gen repository is not yet not supported by this cookbook")
+  Chef::Log.warn("Adding the #{node['platform_family']} mongodb-org repository is not yet not supported by this cookbook")
 end
