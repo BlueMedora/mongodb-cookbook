@@ -26,7 +26,7 @@ else
   default['mongodb']['config']['fork'] = false
 end
 default['mongodb']['config']['dbpath'] = '/var/lib/mongodb'
-default['mongodb']['config']['nojournal'] = false
+#default['mongodb']['config']['nojournal'] = false
 default['mongodb']['config']['rest'] = false
 default['mongodb']['config']['smallfiles'] = false
 default['mongodb']['config']['oplogSize'] = nil
