@@ -1,6 +1,10 @@
 # MongoDB Cookbook
 
-Installs and configures MongoDB, supporting:
+[![Build Status](https://travis-ci.org/sous-chefs/mongodb.svg)](https://travis-ci.org/sous-chefs/mongodb)
+
+Installs and configures MongoDB
+
+## Supports:
 
 * Single MongoDB instance
 * Replication
@@ -9,11 +13,9 @@ Installs and configures MongoDB, supporting:
 * 10gen repository package installation
 * 10gen MongoDB Monitoring System
 
-[![Build Status](https://travis-ci.org/chef-brigade/mongodb-cookbook.svg)](https://travis-ci.org/chef-brigade/mongodb-cookbook)
-
 ## Community
 
-Live discussion happens on [![Slack](http://brigade-slackin.herokuapp.com/badge.svg)](https://brigade-slackin.herokuapp.com/)
+Live discussion happens on [![Chef Community Slack](https://community-slack.chef.io/badge.svg)](https://community-slack.chef.io/) in [#sous-chefs](https://chefcommunity.slack.com/messages/sous-chefs/).
 
 ## REQUIREMENTS:
 
@@ -44,7 +46,7 @@ For examples see the USAGE section below.
 
 ### MongoDB setup
 
-* `default[:mongodb][:install_method]` - This option can be "distro", "mongodb-org" or "none" - Default (distro)
+* `default['mongodb']['install_method']` - This option can be "distro", "mongodb-org" or "none" - Default (distro)
 
 ### MongoDB Configuration
 
@@ -61,35 +63,32 @@ Basically all settings defined in the Configuration File Options documentation p
 
 ### Cookbook specific attributes
 
-* `node[:mongodb][:reload_action]` - Action to take when MongoDB conf files are
-    modified, default is `"restart"`
-* `node[:mongodb][:package_version]` - Version of the MongoDB package to install, default is nil
-* `node[:mongodb][:client_role]` - Role identifying all external clients which should have access to a mongod instance
+* `node['mongodb']['reload_action']` - Action to take when MongoDB conf files are modified, default is `"restart"`
+* `node['mongodb']['package_version']` - Version of the MongoDB package to install, default is nil
+* `node['mongodb']['client_roles']` - Role identifying all external clients which should have access to a mongod instance
 
 ### Sharding and replication attributes
 
 * `node['mongodb']['config']['replSet']` - Define name of replicaset
-* `node[:mongodb][:cluster_name]` - Name of the cluster, all members of the cluster must
-    reference to the same name, as this name is used internally to identify all
-    members of a cluster.
-* `node[:mongodb][:shard_name]` - Name of a shard, default is "default"
+* `node['mongodb']['cluster_name']` - Name of the cluster, all members of the cluster must reference to the same name, as this name is used internally to identify all members of a cluster.
+* `node['mongodb']['shard_name']` - Name of a shard, default is "default"
 * `node['mongodb']['sharded_collections']` - Define which collections are sharded
-* `node[:mongodb][:replica_arbiter_only]` - Set to true to make node an [arbiter](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].arbiterOnly).
-* `node[:mongodb][:replica_build_indexes]` - Set to false to omit [index creation](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].buildIndexes).
-* `node[:mongodb][:replica_hidden]` - Set to true to [hide](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].hidden) node from replicaset.
-* `node[:mongodb][:replica_slave_delay]` - Number of seconds to [delay slave replication](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].slaveDelay).
-* `node[:mongodb][:replica_priority]` - Node [priority](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].priority).
-* `node[:mongodb][:replica_tags]` - Node [tags](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].tags).
-* `node[:mongodb][:replica_votes]` - Number of [votes](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].votes) node will cast in an election.
+* `node['mongodb']['replica_arbiter_only']` - Set to true to make node an [arbiter](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].arbiterOnly).
+* `node['mongodb']['replica_build_indexes']` - Set to false to omit [index creation](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].buildIndexes).
+* `node['mongodb']['replica_hidden']` - Set to true to [hide](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].hidden) node from replicaset.
+* `node['mongodb']['replica_slave_delay']` - Number of seconds to [delay slave replication](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].slaveDelay).
+* `node['mongodb']['replica_priority']` - Node [priority](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].priority).
+* `node['mongodb']['replica_tags']` - Node [tags](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].tags).
+* `node['mongodb']['replica_votes']` - Number of [votes](http://docs.mongodb.org/manual/reference/replica-configuration/#local.system.replset.members[n].votes) node will cast in an election.
 
 
 ### shared MMS Agent attributes
 
 * `node['mongodb']['mms_agent']['api_key']` - MMS Agent API Key. No default, required.
-* `node['mongodb['mms_agent']['monitoring']['version']` - Version of the MongoDB MMS Monitoring Agent package to download and install. Default is '2.0.0.17-1', required.
-* `node['mongodb['mms_agent']['monitoring'][<setting>]` - General MongoDB MMS Monitoring Agent configuration file option.
-* `node['mongodb['mms_agent']['backup']['version']` - Version of the MongoDB MMS Backup Agent package to download and install. Default is '1.4.3.28-1', required.
-* `node['mongodb['mms_agent']['backup'][<setting>]` - General MongoDB MMS Monitoring Agent configuration file option.
+* `node['mongodb']['mms_agent']['monitoring']['version']` - Version of the MongoDB MMS Monitoring Agent package to download and install. Default is '2.0.0.17-1', required.
+* `node['mongodb']['mms_agent']['monitoring'][<setting>]` - General MongoDB MMS Monitoring Agent configuration file option.
+* `node['mongodb']['mms_agent']['backup']['version']` - Version of the MongoDB MMS Backup Agent package to download and install. Default is '1.4.3.28-1', required.
+* `node['mongodb']['mms_agent']['backup'][<setting>]` - General MongoDB MMS Monitoring Agent configuration file option.
 
 ### User management attributes
 
@@ -172,20 +171,20 @@ The result is a new system service with
 ### Replicasets
 
 Add `mongodb::replicaset` (instead of `mongodb::default`) to the node's run_list. Also choose a name for your
-replicaset cluster and set the value of `node[:mongodb][:cluster_name]` for each
+replicaset cluster and set the value of `node['mongodb']['cluster_name']` for each
 member to this name.
 
 ### Sharding
 
 You need a few more components, but the idea is the same: identification of the
 members with their different internal roles (mongos, configserver, etc.) is done via
-the `node[:mongodb][:cluster_name]` and `node[:mongodb][:shard_name]` attributes.
+the `node['mongodb']['cluster_name']` and `node['mongodb']['shard_name']` attributes.
 
 Let's have a look at a simple sharding setup, consisting of two shard servers, one
 config server and one mongos.
 
 First we would like to configure the two shards. For doing so, just use
-`mongodb::shard` in the node's run_list and define a unique `mongodb[:shard_name]`
+`mongodb::shard` in the node's run_list and define a unique `mongodb['shard_name']`
 for each of these two nodes, say "shard1" and "shard2".
 
 Then configure a node to act as a config server - by using the `mongodb::configserver`
@@ -195,7 +194,7 @@ And finally you need to configure the mongos. This can be done by using the
 `mongodb::mongos` recipe. The mongos needs some special configuration, as these
 mongos are actually doing the configuration of the whole sharded cluster.
 Most importantly you need to define what collections should be sharded by setting the
-attribute `mongodb[:sharded_collections]`:
+attribute `mongodb['sharded_collections']`:
 
 ```ruby
 {
@@ -253,26 +252,37 @@ the `node['mongodb']['config']['auth']` attribute to true in the chef json.
 
 If the auth configuration is true, it will try to create the `node['mongodb']['admin']` user, or
 update them if they already exist. Before using on a new database, ensure you're overwriting
-the `node['mongodb']['admin']['username']` and `node['mongodb']['admin']['password']` to
+the `node['mongodb']['authentication']['username']` and `node['mongodb']['authentication']['password']` to
 something besides their default values.
+
+To update the admin username or password after already having deployed the recipe with authentication
+as required, simply change `node['mongodb']['admin']['password']` to the new password while keeping the
+value of `node['mongodb']['authentication']['password']` the old value. After the recipe runs successfully,
+be sure to change the latter variable to the new password so that subsequent attempts to authenticate will
+work.
 
 There's also a user resource which has the actions `:add`, `:modify` and `:delete`. If modify is
 used on a user that doesn't exist, it will be added. If add is used on a user that exists, it
 will be modified.
 
+If using this recipe with replication and sharding, ensure that the `node['mongodb']['key_file_content']`
+is set. All nodes must have the same key file in order for the replica set to initialize successfully
+when authentication is required. For mongos instances, set `node['mongodb']['mongos_create_admin']` to
+`true` to force the creation of the admin user on mongos instances.
+
 # LICENSE and AUTHOR:
 
-### Originally forked from
-https://github.com/edelight/chef-mongodb
+## Original Author
+- Author:: Markus Korn <markus.korn@edelight.de> via https://github.com/edelight/chef-mongodb
 
-### Original Author
-Markus Korn <markus.korn@edelight.de>
+## Current Maintainers
 
-### Current Maintainers
-Pierce Moore <me@prex.io>
+- Maintainer:: Pierce Moore <me@prex.io>
+- Maintainer Community:: Sous Chefs [help@sous-chefs.org](mailto:help@sous-chefs.org)
 
 Copyright:: 2011-2014, edelight GmbH
 
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -284,3 +294,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
