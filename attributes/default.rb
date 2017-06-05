@@ -87,15 +87,9 @@ when 'rhel', 'fedora'
   # determine the package name
   # from http://rpm.pbone.net/index.php3?stat=3&limit=1&srodzaj=3&dl=40&search=mongodb
   # verified for RHEL5,6 Fedora 18,19
-<<<<<<< HEAD
   default[:mongodb][:repo] = 'http://repo.mongodb.org/yum/redhat/'
   default[:mongodb][:package_name] = 'mongodb-org-server'
   default[:mongodb][:sysconfig_file] = '/etc/sysconfig/mongodb'
-=======
-  default['mongodb']['repo'] = 'http://downloads-distro.mongodb.org/repo/redhat/os'
-  default['mongodb']['package_name'] = 'mongodb-server'
-  default['mongodb']['sysconfig_file'] = '/etc/sysconfig/mongodb'
->>>>>>> upstream/master
   # Weird user/group for older RHEL & Fedora versions
   if (node['platform_version'].to_i < 7 && node['platform_family'] == 'rhel') \
     || (node['platform_version'].to_i < 20 && node['platform_family'] == 'fedora')
